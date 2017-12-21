@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>merge movies filtered and pagination list web app</title>
+        <script src="vendor/Rx.min.js"></script>
+        <style>
+            body{ color: #4a4a4a; text-align: center; }
+            .filters { margin-bottom: 20px; }
+            .content { max-width: 400px; height: 600px; margin : auto; overflow: scroll; border: .1px solid #c4bebe; }
+            .item { border-bottom: .1px solid #c4bebe; }
+            h4{ margin-top : 5px; }
+            .pagination button{ font-size : 1rem; }
+        </style>
+    </head>
+    <body>
+
+        <div class="filters">
+            <button>title</button>
+            <button>year</button>
+            <button>rating</button>
+            <button>peers</button>
+            <button>seeds</button>
+            <button>download_count</button>
+            <button>like_count</button>
+            <button>date_added</button>
+        </div>
+
+        
+        <div class="content"></div>
+        
+        
+        <div class="pagination">
+            <button>prev</button>
+            <button>next</button>
+        </div>
+        
+        
+        <script>
+            var filters = document.querySelectorAll('.filters button'),
+                content = document.querySelector('.content'),
+                pagination = document.querySelectorAll('.pagination button');
+
+
+
+            var query = {
+                sort_by : 'rating',
+                page : 1
+            };
+
+
+
+            filters$ = Rx.Observable
+                        .fromEvent(filters, 'click')
+                        .debounceTime(300)
+                        .do(e => query.page = e.target.innerText !== query.sort_by ? 1 : query.page)
+                        .map(e => Object.assign(query, query, { sort_by : e.target.innerText }))
+
+
+
+            pagination$ = Rx.Observable
+                        .fromEvent(pagination, 'click')
+                        .debounceTime(300)
+                        .map(clickEvent => clickEvent.target.innerText)
+                        .map(e => {
+                            query.page += e === 'next' ? +1 : -1;
+                            return query;
+                        });
+
+
+
+            filters$.merge(pagination$)
+                    .map(e => {
+                        console.log('query', e);
+                        return e;
+                    })
+                    .flatMap(({ sort_by, page }) => {
+                            content.innerHTML = '<h2>검색중입니다...</h2>';
+                            return Rx.Observable.fromPromise(
+                                fetch(`https://yts.am/api/v2/list_movies.json?sort_by=${ sort_by }&page=${ page }&limit=5`)
+                                .then(res => res.json())
+                                .then(e => e.data.movies)
+                            )
+                        })
+                        .do(() => content.innerHTML = '')
+                        .subscribe(movies => movies.reduce((element, movie) => {
+                            let elem = document.createElement('div');
+                            elem.className = 'item';
+                            elem.innerHTML = `
+                                <h4>no.${ movie.id }</h4>
+                                <img src=${ movie.medium_cover_image }>
+                                <h2>${ movie.title }</h2>
+                                <h3>평점 : ${ movie.rating } / 10</h3>
+                                <h3>제작년도 : ${ movie.year }</h3>
+                            `;
+                            element.appendChild(elem);
+                            return element;
+                        }, content),
+                        err => console.error('error', err));
+
+        </script>
+    </body>
+</html>
