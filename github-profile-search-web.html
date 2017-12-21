@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>github profile search web app</title>
+        <script src="vendor/Rx.min.js"></script>
+    </head>
+    <body>
+
+
+        <h3>깃허브 유저명</h3>
+        <input/>
+        <div id="content"></div>
+
+
+        <script>            
+            var input   = document.querySelector('input'),
+                content = document.getElementById('content');
+
+            
+            Rx.Observable
+                        .fromEvent(input, 'keyup')
+                        .debounceTime(300)
+                        .map(inputEvent => inputEvent.target.value)
+                        .filter(inputText => inputText.length > 3)
+                        .flatMap( name => {
+                            content.innerHTML = '<h2>검색중입니다.</h2>';
+                            return Rx.Observable.fromPromise(fetch(`https://api.github.com/users/${ name }`).then(res => res.json()))
+                        })
+                        .subscribe(user => content.innerHTML = !user.name ? '<h2>해당 닉네임을 가진 사용자가 없습니다.</h2>' : `
+                            <img src="${ user.avatar_url }" width="80" height="80">
+                            <p> 아이디 : ${ user.name }</p>
+                            <p> 이메일 : ${ user.email }</p>
+                            <p> 직장 : ${ user.company }</p>
+                            <p> 사이트 : 
+                                <a href='${ user.html_url }' target='_blank' > ${ user.html_url } </a>
+                            </p>
+                            <p> 깃헙 블로그 :
+                                <a href='${ user.blog }' target='_blank' > ${ user.blog } </a>
+                            </p>
+                            <p> 공개 레포지토리 : ${ user.public_repos }</p>
+                            <p> 팔로우 : ${ user.followers }</p>
+                            <p> 팔로잉 : ${ user.following }</p>
+                        `,
+                        err => console.error('error', err));
+
+        </script>
+    </body>
+</html>
