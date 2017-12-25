@@ -1,20 +1,23 @@
-## github profile search web app
+### github profile search web app
 > https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/github-profile-search-web.html
 
-## todo web app
+### todo web app
 > https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/todo-web.html
 
-## todo web app (flatMap)
+### todo web app (flatMap)
 > https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/flatmap-todo-web.html
 
-## movies filtered list web app
+### movies filtered list web app
 > https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/movies-filtered-list-web.html
 
-## movies pagination and filtered list web app (Merge)
+### movies pagination and filtered list web app (Merge)
 > https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/merge-movies-filtered-and-pagination-list-web.html
 
-## todo web app (Merge)
+### todo web app (Merge)
 > https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/merge-todo-web.html
 
-## movies infinite scroll and filtered list web app (Merge)
+### movies infinite scroll and filtered list web app (Merge)
 > https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/merge-movies-infiniteScroll-and-filtered-list-web.html
+
+### form validation web app (combineLatest)
+> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/combineLatest-form-validation-web.html

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>combineLatest form validation web app</title>
+        <script src="vendor/Rx.min.js"></script>
+    </head>
+    <body>
+
+        <form name="registForm">
+
+            계정 : <input type="text" name="id">
+            <strong class="valid id"></strong>
+            <p />
+            
+
+            암호 : <input type="password" name="pass">
+            <strong class="valid pass"></strong>
+            <p />
+            
+
+            이름 : <input type="text" name="name">
+            <strong class="valid nickname"></strong>
+            <p />
+
+        </form>
+        
+        
+        <h3>유효성 검사 <strong class="valid result"></strong> </h3>
+
+
+
+        <script>
+            var form  = document.forms['registForm'],
+                [id, pass, nickname, result] = document.querySelectorAll('.valid');
+
+
+            Rx.Observable.combineLatest(
+                Rx.Observable
+                    .fromEvent(form.id, 'keyup')
+                    .map(e => e.target.value)
+                    .map(e => e.length > 5)
+                    .do(e => id.innerText = e),
+                Rx.Observable
+                    .fromEvent(form.pass, 'keyup')
+                    .map(e => e.target.value)
+                    .map(e => e.length > 5)
+                    .do(e => pass.innerText = e),
+                Rx.Observable
+                    .fromEvent(form.name, 'keyup')
+                    .map(e => e.target.value)
+                    .map(e => e.length > 5)
+                    .do(e => nickname.innerText = e),
+                (ob1, ob2, ob3) => ob1 && ob2 && ob3
+            )
+            .subscribe(v => result.innerText = v);
+
+        </script>
+    </body>
+</html>
