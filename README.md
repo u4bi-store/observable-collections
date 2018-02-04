@@ -1,23 +1,23 @@
-### github profile search web app
-> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/github-profile-search-web.html
+#### (fromEvent) Profile search
+> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/(fromEvent)__profile-search.html
 
-### todo web app
-> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/todo-web.html
+#### (fromEvent) Todo
+> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/(fromEvent)__todo.html
 
-### todo web app (flatMap)
-> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/flatmap-todo-web.html
+#### (flatMap) Todo
+> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/(flatMap)__todo.html
 
-### movies filtered list web app
-> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/movies-filtered-list-web.html
+#### (Merge) Todo
+> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/(merge)__todo.html
 
-### movies pagination and filtered list web app (Merge)
-> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/merge-movies-filtered-and-pagination-list-web.html
+#### (fromPromise) Ajax call
+> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/(fromPromise)__ajax_call.html
 
-### todo web app (Merge)
-> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/merge-todo-web.html
+#### (Merge) Pagination
+> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/(merge)__pagination.html
 
-### movies infinite scroll and filtered list web app (Merge)
-> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/merge-movies-infiniteScroll-and-filtered-list-web.html
+#### (Merge) Infinite scroll
+> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/(merge)__infinite-scroll.html
 
-### form validation web app (combineLatest)
-> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/combineLatest-form-validation-web.html
+#### (combineLatest) form Validation
+> https://cdn.rawgit.com/u4bi/observable-webapp-collections/master/(combineLatest)__form-validation.html
